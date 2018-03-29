@@ -3,7 +3,8 @@
 ;????????????????? ?????????????????? ????????????????
 
 #include<Misc.au3>
-
+#include <SendMessage.au3>
+#include <WindowsConstants.au3>
 
 
 HotKeySet("{ESC}", "stop")
@@ -27,7 +28,7 @@ Return 1
 EndIf
 EndFunc
 
-If _PSsixLoadH("Nox App Player") Then WinActivate($GameHD) ;
+If _PSsixLoadH("NoxPlayer1") Then WinActivate($GameHD) ;
 
 
 
@@ -43,191 +44,163 @@ $TopLeftPauseButtonColor =  0x03A9FF
 $SkipButtonX = 73
 $SkipButtonY = 113
 
-;Chat Valuable
-$ChatDialogBorderTopRightX = 504
-$ChatDialogBorderTopRightY = 79
-$ChatDialogBorderTopRightColor = 0xF4F4F6
-
-;Auto Valuable
-$AutoButtonX = 75
-$AutoButtonY = 970
-$AutoButtonColor = 0x003D63
-
-;Next Valuable
-$NextButtonX = 276
-$NextButtonY= 831
-$NextButtonColor = 0x0057C3
-$Next2ButtonX = 278
-$Next2ButtonY= 835
-$Next2ButtonColor = 0x00388A
-
-;Sword Icon Valuable
-$SwordButtonX = 22
-$SwordButtonY= 743
-$SwordButtonColor = 0x988366
 
 
-;Sword Icon Valuable
-$SwordButton2X = 23
-$SwordButton2Y= 643
-$SwordButton2Color = 0x998062
-
-;Tip Button Valuable
-$CloseTipButtonX = 525
-$CloseTipButtonY = 241
-$CloseTipButtonColor = 0xFFFFFF
-
-;Depart Valuable
-$DepartButtonX = 280
-$DepartButtonY = 851
-$DepartButtonColor =  0x0062AD
-
-;SelectMission Valuable
-$NewMissionX = 413
-$NewMissionY = 339
-$NewMissionColor = 0xFFFF7F
-
-$NewMission2X = 490
-$NewMission2Y = 482
-$NewMission2Color = 0x7D7D78
-
-;UseSkill Valuable
-$PlayerViewX = 257
-$PlayerViewY = 663
-$PlayerViewColor = 0x179CA0
-
-;CustomerSupport Valuable
-$BackButtonX = 228
-$BackButtonY = 246
-$BackButtonColor = 0xD2D3D3
-
-;Latius Woods
-$LatiusWoodsX = 273
-$LatiusWoodsY = 535
-$LatiusWoodsColor = 0x51A55B
-
-;BookIcon
-$BookIconX = 519
-$BookIconY = 225
-$BookIconColor = 0xFFFFFF
-
-ConsoleWrite('Start While Loop' & @CRLF)
 While 1
 
-	;New Game
-	if PixelGetColor(117,895,$GameHD) = 0x4C617D Then
-		ConsoleWrite('Start Game' & @CRLF)
-		ControlClick ($GameHD, "", "","left",1,117,895)
-		Sleep(500)
-		ControlClick ($GameHD, "", "","left",1,279,953)
+	;Skip
+	if PixelGetColor(487, 922,$GameHD) = 0xE2C9AF Then
+		ConsoleWrite('Skip' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,487, 922)
+
 	EndIf
 
-	;Click Screen For past Chat
-	ControlClick ($GameHD, "", "","left",1,10,71)
-	Sleep(500)
-	;Check Skip
-	If PixelGetColor($TopLeftPauseButtonX,$TopLeftPauseButtonY,$GameHD) = $TopLeftPauseButtonColor Then
-		ConsoleWrite('Pause Detected' & @CRLF)
-		ControlClick ($GameHD, "", "","left",1,$TopLeftPauseButtonX,$TopLeftPauseButtonY)
-		Sleep(1000)
-		ControlClick ($GameHD, "", "","left",1,$SkipButtonX,$SkipButtonY)
+	;Skip
+	if PixelGetColor(505, 135,$GameHD) = 0xE1CEBD Then
+		ConsoleWrite('Skip' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,505, 135)
 
-	;Check Chat Dialog
-	ElseIf PixelGetColor($ChatDialogBorderTopRightX,$ChatDialogBorderTopRightY,$GameHD) = $ChatDialogBorderTopRightColor Then
-		ConsoleWrite('Chat Click' & @CRLF)
-		ControlClick ($GameHD, "", "","left",1,$ChatDialogBorderTopRightX,$ChatDialogBorderTopRightY)
+	EndIf
 
-	;Auto Button
-	ElseIf PixelGetColor($AutoButtonX,$AutoButtonY,$GameHD) = $AutoButtonColor Then
-		ConsoleWrite('AutoButton Press' & @CRLF)
-		ControlClick ($GameHD, "", "","left",1,$AutoButtonX,$AutoButtonY)
+	;dialog
+	if PixelGetColor(383, 601,$GameHD) = 0x224B64 Then
+		ConsoleWrite('Skip' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,383, 601)
 
-	;Next Button
-	ElseIf PixelGetColor($NextButtonX,$NextButtonY,$GameHD) = $NextButtonColor Then
-		ConsoleWrite('Next Press' & @CRLF)
-		ControlClick ($GameHD, "", "","left",1,$NextButtonX,$NextButtonY)
+	EndIf
 
-	;Next Button
-	ElseIf PixelGetColor($Next2ButtonX,$Next2ButtonY,$GameHD) = $Next2ButtonColor Then
-		ConsoleWrite('Next Press' & @CRLF)
-		ControlClick ($GameHD, "", "","left",1,$Next2ButtonX,$Next2ButtonY)
+	;before mission 1
+	if PixelGetColor(415, 635,$GameHD) = 0x1F5891 Then
+		ConsoleWrite('click skill' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,415, 635)
+	EndIf
 
-	;Use Skill
-	ElseIf PixelGetColor($PlayerViewX,$PlayerViewY,$GameHD) = $PlayerViewColor Then
-		ConsoleWrite('Use Skill' & @CRLF)
-		MouseClickDrag("", 257, 663, 322, 690)
-		Sleep(2000)
-		ControlClick ($GameHD, "", "","left",1,322, 690)
-		Sleep(1000)
-		ControlClick ($GameHD, "", "","left",1,257, 663)
+	if PixelGetColor(456, 310,$GameHD) = 0xEEDDBB Then
+		ConsoleWrite('close info' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,456, 310)
+	EndIf
 
-	;Attack Button
-	ElseIf PixelGetColor($SwordButtonX,$SwordButtonY,$GameHD) = $SwordButtonColor Then
-		ConsoleWrite('Attack Press' & @CRLF)
-		ControlClick ($GameHD, "", "","left",1,140,781)
+	if PixelGetColor(456, 185,$GameHD) = 0x500E08 Then
+		ConsoleWrite('close info' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,456, 185)
+	EndIf
 
-	;Attack Button
-	ElseIf PixelGetColor($SwordButton2X,$SwordButton2Y,$GameHD) = $SwordButton2Color Then
-		ConsoleWrite('Attack Press' & @CRLF)
-		ControlClick ($GameHD, "", "","left",1,143,683)
+	if PixelGetColor(156, 690,$GameHD) = 0x4B3A28 Then
+		ConsoleWrite('click hero' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,156, 690)
 
-	;Close Tip
-	ElseIf PixelGetColor($CloseTipButtonX,$CloseTipButtonY,$GameHD) = $CloseTipButtonColor Then
-		ConsoleWrite('Close Tip Press' & @CRLF)
-		ControlClick ($GameHD, "", "","left",1,$CloseTipButtonX,$CloseTipButtonY)
+	EndIf
 
-	;Depart Button
-	ElseIf PixelGetColor($DepartButtonX,$DepartButtonY,$GameHD) = $DepartButtonColor Then
-		ConsoleWrite('Depart Press' & @CRLF)
-		ControlClick ($GameHD, "", "","left",1,$DepartButtonX,$DepartButtonY)
+	if PixelGetColor(210, 436,$GameHD) = 0xFFFFFF Then
+		ConsoleWrite('paste hero' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,210, 436)
+	EndIf
 
-	;SelectMission
-	ElseIf PixelGetColor($NewMissionX,$NewMissionY,$GameHD) = $NewMissionColor Then
-		if PixelGetColor($NewMission2X,$NewMission2Y,$GameHD) = $NewMission2Color Then
-			ConsoleWrite('Select Mission Press' & @CRLF)
-			ControlClick ($GameHD, "", "","left",1,$NewMissionX,$NewMissionY)
-		Else
-			ControlClick ($GameHD, "", "","left",1,55,209)
-			Sleep(1000)
-			ControlClick ($GameHD, "", "","left",1,55,209)
-		EndIf
 
-	;Customer Support Back
-	ElseIf PixelGetColor($BackButtonX,$BackButtonY,$GameHD) = $BackButtonColor Then
-		ConsoleWrite('Back Press' & @CRLF)
-		ControlClick ($GameHD, "", "","left",1,55,235)
+	if PixelGetColor(450, 606,$GameHD) = 0xFFFFFF Then
+		ConsoleWrite('Start 1-1' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,450, 606)
+	EndIf
 
-	;Latius Woods
-	ElseIf PixelGetColor($LatiusWoodsX,$LatiusWoodsY,$GameHD) = $LatiusWoodsColor Then
-		ConsoleWrite('Latius Press' & @CRLF)
-		ControlClick ($GameHD, "", "","left",1,$LatiusWoodsX,$LatiusWoodsY)
+	if PixelGetColor(476, 652,$GameHD) = 0x22272A Then
+		ConsoleWrite('Clickchat' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,476, 652)
+	EndIf
 
-	;Infomation Back
-	ElseIf PixelGetColor($BookIconX,$BookIconY,$GameHD) = $BookIconColor Then
-		ConsoleWrite('Back Press' & @CRLF)
-		ControlClick ($GameHD, "", "","left",1,55,214)
+	if PixelGetColor(166, 858,$GameHD) = 0xCAC2B9 Then
+		ConsoleWrite('Click Hero1' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,166, 858)
+	EndIf
 
-	;Go to recieve Mail
-	ElseIf PixelGetColor(430,211,$GameHD) = 0xB57C75 Then
-		ConsoleWrite('Mail Press' & @CRLF)
-		ControlClick ($GameHD, "", "","left",1,430,211)
-		Sleep(4000)
-		ControlClick ($GameHD, "", "","left",1,405,250)
+	if PixelGetColor(399, 71,$GameHD) = 0xEEDDBE Then
+		ConsoleWrite('2X Speed' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,399, 71)
+	EndIf
+
+
+	if PixelGetColor(495, 922,$GameHD) = 0xFFFFFF Then
+		ConsoleWrite('Click Skill' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,495, 922)
+	EndIf
+
+
+	if PixelGetColor(192, 605,$GameHD) = 0xFFFFFF Then
+		ConsoleWrite('Buff Main Char' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,192, 605)
 		Sleep(3000)
-		ControlClick ($GameHD, "", "","left",1,413,965)
-	Else
-		;Check Coupon
-		$coord = PixelSearch(421, 696, 435, 710,0xFF0000,0,1,$GameHD )
-		If @error Then
-			ConsoleWrite('Coupon Enough' & @CRLF)
-			ControlClick ($GameHD, "", "","left",1,416,685)
-			Sleep(800)
-			ControlClick ($GameHD, "", "","left",1,278,610)
-		Else
-			ConsoleWrite('Coupon Empty' & @CRLF)
-			ControlClick ($GameHD, "", "","left",1,137,678)
-			Sleep(1000)
-			ControlClick ($GameHD, "", "","left",1,285,603)
-		EndIf
-   EndIf
+		ControlClick ($GameHD, "", "","left",1,192, 605)
+		Sleep(1000)
+		ControlClick ($GameHD, "", "","left",1,307, 903)
+		Sleep(1000)
+		ControlClick ($GameHD, "", "","left",1,198, 451)
+	EndIf
+
+
+
+	if PixelGetColor(180, 367,$GameHD) = 0x0C2DB1 Then
+		ConsoleWrite('Click Hero2' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,191, 473)
+		Sleep(1000)
+		ControlClick ($GameHD, "", "","left",1,471, 898)
+		Sleep(1000)
+		ControlClick ($GameHD, "", "","left",1,440, 465)
+
+	EndIf
+
+
+	if PixelGetColor(61, 917,$GameHD) = 0xFFFFFF Then
+		ConsoleWrite('back to home' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,61, 917)
+	EndIf
+
+
+
+	if PixelGetColor(80, 804,$GameHD) = 0x4F2624 Then
+		ConsoleWrite('summon free' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,80, 804)
+	EndIf
+
+	if PixelGetColor(272, 629,$GameHD) = 0xEAB82B Then
+		ConsoleWrite('summon' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,272, 629)
+	EndIf
+
+	if PixelGetColor(299, 915,$GameHD) = 0xFFFFFF Then
+		ConsoleWrite('ok button' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,299, 915)
+	EndIf
+
+	if PixelGetColor(423, 592,$GameHD) = 0x1F333C Then
+		ConsoleWrite('skip chat' & @CRLF)
+		ControlClick ($GameHD, "", "","left",1,423, 592)
+	EndIf
+
+	if PixelGetColor(520, 86,$GameHD) = 0xFFFFFF Then
+		ConsoleWrite('back' & @CRLF)
+		ControlClick ($GameHD, "", "","left",520, 86)
+	EndIf
+
+	if PixelGetColor(460, 843,$GameHD) = 0xFFFFFF Then
+		ConsoleWrite('adventure' & @CRLF)
+		ControlClick ($GameHD, "", "","left",455, 807)
+	EndIf
+	if PixelGetColor(261, 658,$GameHD) = 0xE6CD9A Then
+		ConsoleWrite('stage1-2' & @CRLF)
+		ControlClick ($GameHD, "", "","left",183, 608)
+	EndIf
+
+	if PixelGetColor(386, 634,$GameHD) = 0xFFFFFF Then
+		ConsoleWrite('click buf char' & @CRLF)
+		ControlClick ($GameHD, "", "","left",348, 600)
+	EndIf
+
+	if PixelGetColor(369, 490,$GameHD) = 0xFFFFFF Then
+		ConsoleWrite('walk' & @CRLF)
+		ControlClick ($GameHD, "", "","left",334, 456)
+	EndIf
+
+
+	Sleep(1000)
 WEnd
+
+
